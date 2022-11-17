@@ -1,15 +1,15 @@
 "use strict"
 
-let secretNumber = Math.trunc(Math.random() * 20) + 1;
+let secretNumber = String (Math.trunc(Math.random() * 20) + 1);
 
 let question = document.querySelector('.number');
 let guess = document.querySelector('.guess');
-
+question.textContent = secretNumber;
 let again = document.querySelector('.again');
 let check = document.querySelector('.check');
-
 let message = document.querySelector('.message');
 let container = document.querySelector('.container');
+
 let score = document.querySelector('.score');
 document.querySelector('.score').textContent = 20;
 let highscore = document.querySelector('.highscore');
@@ -17,11 +17,10 @@ document.querySelector('.highscore').textContent = 0;
 
 check.addEventListener('click', function(){
   if(!guess.value){
-    message.textContent = "invalid input"
-    score.textContent-- ;
+    message.textContent = "🤨 invalid input 🚫"   
     guess.value = "";
-  } else if (guess.value == secretNumber){
-    message.textContent = "You win";
+  } else if (guess.value === secretNumber){
+    message.textContent = "🎉🎊😁😁 You win !!!";
     if(score.textContent > highscore.textContent)
     {highscore.textContent = score.textContent} ;
     container.style.backgroundColor = '#60b347';
@@ -32,30 +31,29 @@ check.addEventListener('click', function(){
   } else if (guess.value != secretNumber) {
 
     if(guess.value < 1 || guess.value > 20){
-        message.textContent = "invalid input"
-        score.textContent-- ;
+        message.textContent = "🤨 invalid input 🚫"
         guess.value = "";
       }else if(guess.value > secretNumber && guess.value <= (secretNumber +5)){
-        message.textContent = "You're Close, just a little lower";
+        message.textContent = "😉 You're Close, just a little lower";
         score.textContent-- ; 
         guess.value = "";
         }else if(guess.value < secretNumber && guess.value >= (secretNumber - 5)){
-        message.textContent = "You're Close, just a little higher";
+        message.textContent = "😉 You're Close, just a little higher";
         score.textContent-- ;
         guess.value = "";
         }else if(guess.value > secretNumber){
-        message.textContent = "too high";
+        message.textContent = "😱 Too high!";
         score.textContent-- ;
         guess.value = "";
         }else{
-        message.textContent = "too low";
+        message.textContent = "😱 Too low!";
         score.textContent-- ;
         guess.value = "";
         }   
   }  
 
   if(score.textContent < 1){
-    message.textContent = "you lost the game";
+    message.textContent = "😭😭 Sorry Game Over";
     score.textContent = '0';
     guess.value = "";
   }
@@ -70,29 +68,3 @@ again.addEventListener('click', function(){
     container.style.backgroundColor = '#5968D9';
     question.style.width = '10%';
 })
-
-
-
- 
-
-// {
-//     if((guess.value + 5) < secretNumber){
-//         message.textContent = "You're Close, just a little higher";
-//         score.textContent-- ; 
-//     } else {
-//         message.textContent = "Too low";
-//     }
-// } else if ((guess.value + 10) > secretNumber){
-//     if((guess.value + 5) > secretNumber){
-//         message.textContent = "You're Close, just a little lower";
-//         score.textContent-- ; 
-//     } else {
-//         message.textContent = "Too high";
-//     }
-// }
-
-
-
-// guess.value > secretNumber ? message.textContent = 'too high':
-//   message.textContent = 'too low';
-//     score.textContent-- ;
