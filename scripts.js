@@ -4,7 +4,6 @@ let secretNumber = String (Math.trunc(Math.random() * 20) + 1);
 
 let question = document.querySelector('.number');
 let guess = document.querySelector('.guess');
-question.textContent = secretNumber;
 let again = document.querySelector('.again');
 let check = document.querySelector('.check');
 let message = document.querySelector('.message');
