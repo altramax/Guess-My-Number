@@ -1,6 +1,6 @@
 "use strict"
 
-let secretNumber = String (Math.trunc(Math.random() * 20) + 1);
+let secretNumber = Math.trunc(Math.random() * 20) + 1;
 
 let question = document.querySelector('.number');
 let guess = document.querySelector('.guess');
@@ -18,7 +18,7 @@ check.addEventListener('click', function(){
   if(!guess.value){
     message.textContent = "🤨 invalid input 🚫"   
     guess.value = "";
-  } else if (guess.value === secretNumber){
+  } else if (guess.value == secretNumber){
     message.textContent = "🎉🎊😁😁 You win !!!";
     if(score.textContent > highscore.textContent)
     {highscore.textContent = score.textContent} ;
