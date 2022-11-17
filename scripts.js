@@ -2,46 +2,62 @@
 
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 
-const question = document.querySelector('.number');
-question.textContent = secretNumber;
+let question = document.querySelector('.number');
+let guess = document.querySelector('.guess');
 
-const guess = document.querySelector('.guess'); 
-const again = document.querySelector('.again');
-const check = document.querySelector('.check');
-const score = document.querySelector('.score');
-const highscore = document.querySelector('.highscore');
-const message = document.querySelector('.message');
-// guess.textContent = "";
+let again = document.querySelector('.again');
+let check = document.querySelector('.check');
 
+let message = document.querySelector('.message');
+let container = document.querySelector('.container');
+let score = document.querySelector('.score');
+document.querySelector('.score').textContent = 20;
+let highscore = document.querySelector('.highscore');
+document.querySelector('.highscore').textContent = 0;
 
 check.addEventListener('click', function(){
   if(!guess.value){
     message.textContent = "invalid input"
     score.textContent-- ;
+    guess.value = "";
   } else if (guess.value == secretNumber){
     message.textContent = "You win";
     if(score.textContent > highscore.textContent)
     {highscore.textContent = score.textContent} ;
-    document.querySelector('.container').style('background-color: #60b347');
+    container.style.backgroundColor = '#60b347';
+    question.style.width = '20%';
+    question.style.padding = '2rem';
+    question.textContent = secretNumber;
+    guess.value = "";
   } else if (guess.value != secretNumber) {
-        if(guess.value > secretNumber && guess.value <= (secretNumber +5)){
-            message.textContent = "You're Close, just a little lower";
-            score.textContent-- ; 
+
+    if(guess.value < 1 || guess.value > 20){
+        message.textContent = "invalid input"
+        score.textContent-- ;
+        guess.value = "";
+      }else if(guess.value > secretNumber && guess.value <= (secretNumber +5)){
+        message.textContent = "You're Close, just a little lower";
+        score.textContent-- ; 
+        guess.value = "";
         }else if(guess.value < secretNumber && guess.value >= (secretNumber - 5)){
         message.textContent = "You're Close, just a little higher";
         score.textContent-- ;
+        guess.value = "";
         }else if(guess.value > secretNumber){
-            message.textContent = "too high";
-            score.textContent-- ;
+        message.textContent = "too high";
+        score.textContent-- ;
+        guess.value = "";
         }else{
-            message.textContent = "too low";
-            score.textContent-- ;
+        message.textContent = "too low";
+        score.textContent-- ;
+        guess.value = "";
         }   
-  } 
+  }  
 
   if(score.textContent < 1){
     message.textContent = "you lost the game";
     score.textContent = '0';
+    guess.value = "";
   }
 })
 
@@ -50,8 +66,9 @@ again.addEventListener('click', function(){
     guess.value = "";
     message.textContent = "Start guessing...";
     secretNumber = Math.trunc(Math.random() * 20) + 1;
-    question.textContent = secretNumber;
-    document.querySelector('.container').style('background-color: #5968D9');
+    question.textContent = "?";
+    container.style.backgroundColor = '#5968D9';
+    question.style.width = '10%';
 })
 
 
