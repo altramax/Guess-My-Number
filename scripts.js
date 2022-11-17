@@ -1,7 +1,8 @@
 "use strict"
-
+// secreat number
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 
+// Global Variables
 let question = document.querySelector('.number');
 let guess = document.querySelector('.guess');
 let again = document.querySelector('.again');
@@ -9,11 +10,13 @@ let check = document.querySelector('.check');
 let message = document.querySelector('.message');
 let container = document.querySelector('.container');
 
+// Initial states
 let score = document.querySelector('.score');
 document.querySelector('.score').textContent = 20;
 let highscore = document.querySelector('.highscore');
 document.querySelector('.highscore').textContent = 0;
 
+// Checking Function
 check.addEventListener('click', function(){
   if(!guess.value){
     message.textContent = "🤨 invalid input 🚫"   
@@ -27,8 +30,9 @@ check.addEventListener('click', function(){
     question.style.padding = '2rem';
     question.textContent = secretNumber;
     guess.value = "";
-  } else if (guess.value != secretNumber) {
+    check.classList.add('hidden');
 
+  } else if (guess.value != secretNumber) {
     if(guess.value < 1 || guess.value > 20){
         message.textContent = "🤨 invalid input 🚫"
         guess.value = "";
@@ -58,12 +62,14 @@ check.addEventListener('click', function(){
   }
 })
 
+// Restart Function
 again.addEventListener('click', function(){
-    score.textContent = "20";
-    guess.value = "";
-    message.textContent = "Start guessing...";
-    secretNumber = Math.trunc(Math.random() * 20) + 1;
-    question.textContent = "?";
-    container.style.backgroundColor = '#5968D9';
-    question.style.width = '10%';
+  score.textContent = "20";
+  guess.value = "";
+  message.textContent = "Start guessing...";
+  secretNumber = Math.trunc(Math.random() * 20) + 1;
+  question.textContent = "?";
+  container.style.backgroundColor = '#5968D9';
+  question.style.width = '10%';
+  check.classList.remove('hidden');
 })
